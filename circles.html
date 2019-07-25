@@ -1,35 +1,194 @@
 <!DOCTYPE html>
-  <head>
-    <meta charset="utf-8">
-    <script src="./node_modules/paper/dist/paper-full.js"></script>
-    <link rel="stylesheet" href='circles.css'>
-    <title>Circles</title>
-    <script type="text/paperscript" canvas="myCanvas">
-    <script src="/node_modules/howler/dist/howler.js"></script>
-    
+<head>
+  <meta charset="utf-8" />
+  <script src="./node_modules/paper/dist/paper-full.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
+  <link rel="stylesheet" href="circles.css" />
+  <title>Circles</title>
+  <script type="text/paperscript" canvas="myCanvas">
+
+    var keyData = {
+    q: {
+    sound: new Howl({
+     src: ['sounds/bubbles.mp3']
+    }),
+    color: '#55efc4'
+    },
+    w: {
+    sound: new Howl({
+     src: ['sounds/clay.mp3']
+    }),
+    color: '#81ecec'
+    },
+    e: {
+    sound: new Howl({
+     src: ['sounds/confetti.mp3']
+    }),
+    color: '#74b9ff'
+    },
+    r: {
+    sound: new Howl({
+     src: ['sounds/corona.mp3']
+    }),
+    color: '#a29bfe'
+    },
+    t: {
+    sound: new Howl({
+     src: ['sounds/dotted-spiral.mp3']
+    }),
+    color: '#dfe6e9'
+    },
+    y: {
+    sound: new Howl({
+     src: ['sounds/flash-1.mp3']
+    }),
+    color: '#00b894'
+    },
+    u: {
+    sound: new Howl({
+     src: ['sounds/flash-2.mp3']
+    }),
+    color: '#00cec9'
+    },
+    i: {
+    sound: new Howl({
+     src: ['sounds/flash-3.mp3']
+    }),
+    color: '#0984e3'
+    },
+    o: {
+    sound: new Howl({
+    src: ['sounds/glimmer.mp3']
+    }),
+    color: '#6c5ce7'
+    },
+    p: {
+    sound: new Howl({
+     src: ['sounds/moon.mp3']
+    }),
+    color: '#b2bec3'
+    },
+    a: {
+    sound: new Howl({
+     src: ['sounds/pinwheel.mp3']
+    }),
+    color: '#ffeaa7'
+    },
+    s: {
+    sound: new Howl({
+     src: ['sounds/piston-1.mp3']
+    }),
+    color: '#fab1a0'
+    },
+    d: {
+    sound: new Howl({
+     src: ['sounds/piston-2.mp3']
+    }),
+    color: '#ff7675'
+    },
+    f: {
+    sound: new Howl({
+     src: ['sounds/prism-1.mp3']
+    }),
+    color: '#fd79a8'
+    },
+    g: {
+    sound: new Howl({
+     src: ['sounds/prism-2.mp3']
+    }),
+    color: '#636e72'
+    },
+    h: {
+    sound: new Howl({
+     src: ['sounds/prism-3.mp3']
+    }),
+    color: '#fdcb6e'
+    },
+    j: {
+    sound: new Howl({
+     src: ['sounds/splits.mp3']
+    }),
+    color: '#e17055'
+    },
+    k: {
+    sound: new Howl({
+     src: ['sounds/squiggle.mp3']
+    }),
+    color: '#d63031'
+    },
+    l: {
+    sound: new Howl({
+     src: ['sounds/strike.mp3']
+    }),
+    color: '#e84393'
+    },
+    z: {
+    sound: new Howl({
+     src: ['sounds/suspension.mp3']
+    }),
+    color: '#2d3436'
+    },
+    x: {
+    sound: new Howl({
+     src: ['sounds/timer.mp3']
+    }),
+    color: '#ff4757'
+    },
+    c: {
+    sound: new Howl({
+     src: ['sounds/ufo.mp3']
+    }),
+    color: '#16a085'
+    },
+    v: {
+    sound: new Howl({
+     src: ['sounds/veil.mp3']
+    }),
+    color: '#27ae60'
+    },
+    b: {
+    sound: new Howl({
+     src: ['sounds/wipe.mp3']
+    }),
+    color: '#2980b9'
+    },
+    n: {
+    sound: new Howl({
+    src: ['sounds/zig-zag.mp3']
+    }),
+    color: '#8e44ad'
+    },
+    m: {
+    sound: new Howl({
+     src: ['sounds/moon.mp3']
+    }),
+    color: '#2ed573'
+    }
+    }
 
     var circles = [];
 
     function onKeyDown(event) {
+      if(keyData[event.key]){
       var maxPoint = new Point(view.size.width, view.size.height);
       var randomPoint = Point.random();
       var point = maxPoint * randomPoint;
       var newCircle = new Path.Circle(point, 500)
-      newCircle.fillColor = "teal";
+      newCircle.fillColor= keyData[event.key].color
+      keyData[event.key].sound.play();
       circles.push(newCircle);
+      }
     }
 
     function onFrame(event){
       for(var i = 0; i < circles.length; i++){
-        circles[i].fillColor.hue += 2;
+        circles[i].fillColor.hue += 1;
         circles[i].scale(.91);
       }
     }
-
-    </script>
-  </head>
-  <body>
-    <canvas id="myCanvas" resize></canvas>
-    <script src="" async defer></script>
-  </body>
-</html>
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas" resize></canvas>
+  <script src="" async defer></script>
+</body>
